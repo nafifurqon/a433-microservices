@@ -2,8 +2,7 @@ name: publish
 
 on: 
   push:
-    branches:
-      - proyek-pertama
+    branches: [ "proyek-pertama" ]
 
 jobs:
   publish-hello-world-image:
