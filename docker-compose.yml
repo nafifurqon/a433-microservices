@@ -6,7 +6,7 @@ services:
   # define app service (node js) called item-app
   item-app:
     # use the specified docker image from github packages
-    image: docker.pkg.github.com/nafifurqon/item-app/item-app:v1
+    image: ghcr.io/nafifurqon/a433-microservices:v1
 
     # map port 80 on the host to port 8080 in the container
     ports:
