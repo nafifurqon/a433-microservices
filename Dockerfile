@@ -1,6 +1,9 @@
 # define node v14 as base docker image
 FROM node:14-alpine
 
+# set label for image
+LABEL org.opencontainers.image.source="https://github.com/nafifurqon/a433-microservices/"
+
 # set /app as working directory inside the container
 WORKDIR /app
 
