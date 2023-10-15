@@ -21,5 +21,5 @@ jobs:
     - name: Build the item-app docker image
       run: |
         docker build -t item-app:v1 .
-        docker tag item-app:v1 docker.pkg.github.com/nafifurqon/item-app/item-app:v1
-        docker push docker.pkg.github.com/nafifurqon/item-app/item-app:v1
+        docker tag item-app:v1 ghcr.io/nafifurqon/item-app/item-app:v1
+        docker push ghcr.io/nafifurqon/item-app/item-app:v1
