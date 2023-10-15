@@ -1,0 +1,52 @@
+# use 3.7 as docker compose version
+version: "3.7"
+
+# define each services
+services:
+  # define app service (node js) called item-app
+  item-app:
+    # use the specified docker image from github packages
+    image: docker.pkg.github.com/nafifurqon/item-app/item-app:v1
+    
+    # run command to install node package, build the apps, and run the apps
+    command: sh -c "npm install --production --unsafe-perm && npm run build && npm start"
+    
+    # map port 80 on the host to port 8080 in the container
+    ports:
+      - 80:8080
+
+    # set /app as working directory inside the container
+    working_dir: /app
+
+    # mount the current directory as a volume to /app in the container
+    volumes:
+      - ./:/app
+
+    # set NODE_ENV and DB_HOST as environtment variable for the apps
+    environment:
+      NODE_ENV: production
+      DB_HOST: item-db
+
+    # depend on the item-db service, ensuring it's launched first
+    depends_on:
+      - item-db
+
+    # always restart the item-app service
+    restart: always
+
+  # define database service (mongo db) called item-db
+  item-db:
+    # use the specified docker image for MongoDB version 3
+    image: mongo:3
+
+    # mount the volume named app-db to /data/db in the container
+    volumes:
+      - app-db:/data/db
+
+    # always restart the item-db service
+    restart: always
+
+# define volumes
+volumes:
+  # define a named volume called app-db
+  app-db:
