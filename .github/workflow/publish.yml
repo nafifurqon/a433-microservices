@@ -1,0 +1,25 @@
+name: publish
+
+on: 
+  push:
+    branches:
+      - proyek-pertama
+
+jobs:
+  publish-hello-world-image:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Build the item-app docker image
+      run: |
+        echo $PERSONAL_ACCESS_TOKEN | docker login docker.pkg.github.com -u nafifurqon --password-stdin
+      env:
+        PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+
+    - name: Build the item-app docker image
+      run: |
+        docker build -t item-app:v1 .
+        docker tag item-app:v1 docker.pkg.github.com/nafifurqon/item-app/item-app:v1
+        docker push docker.pkg.github.com/nafifurqon/item-app/item-app:v1
